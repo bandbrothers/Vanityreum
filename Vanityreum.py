@@ -57,6 +57,12 @@ def compute_adr(priv_num):
 	except KeyboardInterrupt:
 		return "x"
 
+def fixed_div(x,y):
+	if y == 0:
+		return 0
+	else:
+		return x / y
+
 if __name__ == '__main__':
 	import multiprocessing
 	p = multiprocessing.Pool(int(multiprocessing.cpu_count()))
@@ -112,7 +118,7 @@ if __name__ == '__main__':
 			inter=1
 		if 'timespent' in locals():
 			print "Time spent : ", humanize_time(timespent)
-			print "Approx global search speed : ","%.1f" %((newprivkeynum-privkeynum)/timespent), " per second\n"
+			print "Approx global search speed : ","%.1f" % fixed_div((newprivkeynum-privkeynum),timespent), " per second\n"
 	if 'inter' not in locals():
 		assert compute_adr(foundprivkeynum) == address
 		print "\nAddress :  %s \n" % address
